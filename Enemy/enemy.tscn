@@ -1,0 +1,198 @@
+[gd_scene load_steps=23 format=3 uid="uid://b5h2seroo5qfj"]
+
+[ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_vc7xs"]
+[ext_resource type="Texture2D" uid="uid://cqillhltkydey" path="res://Art/Enemy/Enemy-Sheet.png" id="2_iq1c7"]
+[ext_resource type="AudioStream" uid="uid://du3rt44ca7oi8" path="res://sounds/enemy_dies.mp3" id="3_m1xrt"]
+[ext_resource type="AudioStream" uid="uid://qqsf3i4o3702" path="res://sounds/enemy_hits_player.mp3" id="4_1mf3m"]
+[ext_resource type="AudioStream" uid="uid://bd1clf7kwo6uy" path="res://sounds/lover_dies.mp3" id="5_sq11u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pejpb"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mi6g"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyjkd"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7gg2"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h61gk"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_daebw"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huyf8"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3pbq"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8rm0"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtllt"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgwpg"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh3j6"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvyx8"]
+atlas = ExtResource("2_iq1c7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_56f21"]
+animations = [{
+"frames": [{
+"duration": 1.25,
+"texture": SubResource("AtlasTexture_pejpb")
+}, {
+"duration": 1.25,
+"texture": SubResource("AtlasTexture_2mi6g")
+}],
+"loop": false,
+"name": &"BackWalking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_dyjkd")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_g7gg2")
+}],
+"loop": false,
+"name": &"Died",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.25,
+"texture": SubResource("AtlasTexture_h61gk")
+}, {
+"duration": 1.25,
+"texture": SubResource("AtlasTexture_daebw")
+}],
+"loop": false,
+"name": &"FrontWalking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.25,
+"texture": SubResource("AtlasTexture_huyf8")
+}, {
+"duration": 1.25,
+"texture": SubResource("AtlasTexture_c3pbq")
+}],
+"loop": false,
+"name": &"LovedBackWalking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_b8rm0")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_gtllt")
+}],
+"loop": false,
+"name": &"LovedDied",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.25,
+"texture": SubResource("AtlasTexture_pgwpg")
+}, {
+"duration": 1.25,
+"texture": SubResource("AtlasTexture_kh3j6")
+}],
+"loop": false,
+"name": &"LovedFrontWalking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvyx8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7df3k"]
+size = Vector2(14, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hpvuj"]
+radius = 346.001
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_282xl"]
+size = Vector2(16, 32)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_vc7xs")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_56f21")
+animation = &"LovedDied"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_7df3k")
+
+[node name="LoverZone" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -14)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoverZone"]
+shape = SubResource("CircleShape2D_hpvuj")
+
+[node name="LoverTouch" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoverTouch"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_282xl")
+
+[node name="EnemyDies" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_m1xrt")
+volume_db = -20.0
+
+[node name="TouchedPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_1mf3m")
+volume_db = -20.0
+
+[node name="LoverDies" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_sq11u")
+volume_db = -20.0
+
+[connection signal="body_entered" from="LoverTouch" to="." method="_on_lover_touch_body_entered"]

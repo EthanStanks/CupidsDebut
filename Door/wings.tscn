@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfwjw7drcxdcd"]
+
+[ext_resource type="Script" path="res://Door/wings.gd" id="1_s6aak"]
+[ext_resource type="Texture2D" uid="uid://cbknmeiewqhqo" path="res://Art/Wings/wings3.png" id="2_wvwsb"]
+[ext_resource type="Texture2D" uid="uid://dexs7plmpb5j3" path="res://Art/Wings/wings4.png" id="3_2iuwk"]
+[ext_resource type="Texture2D" uid="uid://b14j1brj21ki7" path="res://Art/Wings/wings.png" id="4_dk842"]
+[ext_resource type="Texture2D" uid="uid://cjidyyylc3ns4" path="res://Art/Wings/wings2.png" id="5_l6uo6"]
+[ext_resource type="AudioStream" uid="uid://c7n6enmccaphx" path="res://sounds/wing.mp3" id="6_l3p2g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1stae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wvwsb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2iuwk")
+}],
+"loop": true,
+"name": &"need",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("4_dk842")
+}, {
+"duration": 1.5,
+"texture": ExtResource("5_l6uo6")
+}],
+"loop": true,
+"name": &"unlocked",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_858rh"]
+height = 34.0
+
+[node name="Wings" type="Area2D"]
+z_index = -10
+collision_layer = 0
+script = ExtResource("1_s6aak")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_1stae")
+animation = &"unlocked"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_858rh")
+
+[node name="WingSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_l3p2g")
+volume_db = -20.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

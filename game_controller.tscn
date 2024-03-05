@@ -1,0 +1,509 @@
+[gd_scene load_steps=18 format=3 uid="uid://bx0qu6aj0oihj"]
+
+[ext_resource type="Script" path="res://GameController.gd" id="1_3ms67"]
+[ext_resource type="PackedScene" uid="uid://c7ovvbp6i6v03" path="res://Camera.tscn" id="2_oh6d3"]
+[ext_resource type="Texture2D" uid="uid://g2cuotxbi0b7" path="res://Art/Heart.png" id="2_s3k14"]
+[ext_resource type="Texture2D" uid="uid://rimm4hook8yd" path="res://Art/LoveArrow.png" id="3_jq06a"]
+[ext_resource type="Script" path="res://PressE.gd" id="4_gabgt"]
+[ext_resource type="Texture2D" uid="uid://becpkg3yt6y8p" path="res://Art/Lives.png" id="5_edso2"]
+[ext_resource type="AudioStream" uid="uid://c2xj8drur35dx" path="res://music/MainMenu.mp3" id="7_s2fu5"]
+[ext_resource type="AudioStream" uid="uid://nkv52ytimjwn" path="res://music/tutorial.mp3" id="8_tcr4g"]
+[ext_resource type="AudioStream" uid="uid://hfjchxwadxji" path="res://music/Level1.mp3" id="9_7w1cv"]
+[ext_resource type="AudioStream" uid="uid://bfdqepnhhpcne" path="res://music/Level2.mp3" id="10_nmclt"]
+[ext_resource type="AudioStream" uid="uid://cxd2e72kboje" path="res://music/Level3.mp3" id="11_jjpuo"]
+[ext_resource type="AudioStream" uid="uid://cgcp043ktgoox" path="res://music/Level4.mp3" id="12_2vwyd"]
+[ext_resource type="AudioStream" uid="uid://bhfncb2jihlcj" path="res://music/Level5.mp3" id="13_si0yp"]
+[ext_resource type="AudioStream" uid="uid://5bmidfhyiq77" path="res://music/Level6.mp3" id="14_575dv"]
+[ext_resource type="AudioStream" uid="uid://b4jwcocy5vdqm" path="res://music/WinScreen.mp3" id="15_arr2x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjeh1"]
+bg_color = Color(0.294118, 0.109804, 0.219608, 0.745098)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnvaq"]
+bg_color = Color(0.705882, 0.196078, 0.196078, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="GameController" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3ms67")
+
+[node name="Main2D" type="Node2D" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+y_sort_enabled = true
+
+[node name="MainMenu" type="Control" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.666667, 1, 1)
+
+[node name="Credits" type="Control" parent="MainMenu"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="me" type="Label" parent="MainMenu/Credits"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 287.0
+offset_bottom = 61.0
+text = "Programming/Design: Ethan Stanks
+Sprites: Ethan Stanks"
+
+[node name="others" type="Label" parent="MainMenu/Credits"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 255.0
+offset_right = 376.0
+offset_bottom = 330.0
+text = "Tile Maps: SciGho Grass -> ninjikin.itch.io/grass
+Music: Eric Matyas -> soundimage.org
+Sound Effects: soundbible.com"
+
+[node name="PlayButton" type="Button" parent="MainMenu"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -15.5
+offset_right = 49.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="Title" type="Label" parent="MainMenu"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 78.0
+offset_right = 490.0
+offset_bottom = 147.0
+theme_override_font_sizes/font_size = 50
+text = "Cupid's Debut"
+
+[node name="CreditsButton" type="Button" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.5
+offset_top = -154.0
+offset_right = 31.5
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Credits"
+
+[node name="HUD" type="Control" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hearts" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = -11.0
+offset_right = 106.0
+offset_bottom = 40.0
+
+[node name="HeartsLabel" type="Label" parent="HUD/Hearts"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -17.0
+offset_right = 21.5
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HUD/Hearts"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -15.0
+offset_right = 50.0
+offset_bottom = 15.0
+grow_vertical = 2
+texture = ExtResource("2_s3k14")
+
+[node name="LoveArrow" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 308.0
+offset_right = 117.0
+offset_bottom = 350.0
+
+[node name="Icon" type="TextureRect" parent="HUD/LoveArrow"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+texture = ExtResource("3_jq06a")
+
+[node name="SoulsProgress" type="ProgressBar" parent="HUD/LoveArrow"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -10.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_yjeh1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rnvaq")
+max_value = 2.0
+value = 2.0
+show_percentage = false
+
+[node name="PressE" type="Label" parent="HUD/LoveArrow"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 25.0
+offset_right = 37.0
+offset_bottom = 48.0
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_gabgt")
+
+[node name="Health" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 308.0
+offset_right = 59.0
+offset_bottom = 350.0
+
+[node name="Icon" type="TextureRect" parent="HUD/Health"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.5
+offset_top = -6.0
+offset_right = 20.5
+offset_bottom = 34.0
+grow_horizontal = 2
+texture = ExtResource("5_edso2")
+
+[node name="HealthBar" type="ProgressBar" parent="HUD/Health"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -10.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_yjeh1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rnvaq")
+max_value = 2.0
+value = 2.0
+show_percentage = false
+
+[node name="PauseMenu" type="Control" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.270588, 0.270588, 0.270588, 0.682353)
+
+[node name="Title" type="Label" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 52.0
+offset_right = 77.0
+offset_bottom = 107.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Paused"
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ResumeButton" type="Button" parent="PauseMenu"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -15.5
+offset_right = 47.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+
+[node name="MenuPauseButton" type="Button" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 293.0
+offset_top = 208.0
+offset_right = 346.0
+offset_bottom = 239.0
+text = "Leave"
+
+[node name="GameCamera" parent="." instance=ExtResource("2_oh6d3")]
+process_mode = 3
+
+[node name="WinScreen" type="Control" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="WinScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.145098, 0.145098, 0.145098, 0.827451)
+
+[node name="Title" type="Label" parent="WinScreen"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -277.0
+offset_top = -58.0
+offset_right = 277.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 38
+text = "You Recovered Cupid's Wings"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="MenuWinButton" type="Button" parent="WinScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -198.0
+offset_right = 48.0
+offset_bottom = -167.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Main Menu"
+
+[node name="LoseScreen" type="Control" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="LoseScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.145098, 0.145098, 0.145098, 0.827451)
+
+[node name="Title" type="Label" parent="LoseScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.5
+offset_top = 59.0
+offset_right = 96.5
+offset_bottom = 114.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "you lost"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="PlayAgain" type="Button" parent="LoseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -15.5
+offset_right = 44.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play Again"
+
+[node name="MenuLoseButton" type="Button" parent="LoseScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -150.0
+offset_right = 48.0
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Main Menu"
+
+[node name="AudioManager" type="Node2D" parent="."]
+
+[node name="MainMenuPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+unique_name_in_owner = true
+stream = ExtResource("7_s2fu5")
+volume_db = -20.0
+autoplay = true
+
+[node name="TutorialPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+unique_name_in_owner = true
+stream = ExtResource("8_tcr4g")
+volume_db = -20.0
+
+[node name="LevelOnePlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+unique_name_in_owner = true
+stream = ExtResource("9_7w1cv")
+volume_db = -20.0
+
+[node name="LevelTwoPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+unique_name_in_owner = true
+stream = ExtResource("10_nmclt")
+volume_db = -20.0
+
+[node name="LevelThreePlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+unique_name_in_owner = true
+stream = ExtResource("11_jjpuo")
+volume_db = -20.0
+
+[node name="LevelFourPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+unique_name_in_owner = true
+stream = ExtResource("12_2vwyd")
+volume_db = -20.0
+
+[node name="LevelFivePlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+unique_name_in_owner = true
+stream = ExtResource("13_si0yp")
+volume_db = -20.0
+
+[node name="LevelSixPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+unique_name_in_owner = true
+stream = ExtResource("14_575dv")
+volume_db = -20.0
+
+[node name="WinScreenPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+unique_name_in_owner = true
+stream = ExtResource("15_arr2x")
+volume_db = -20.0
+
+[connection signal="pressed" from="MainMenu/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MainMenu/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="PauseMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MenuPauseButton" to="." method="_on_menu_pause_button_pressed"]
+[connection signal="pressed" from="WinScreen/MenuWinButton" to="." method="_on_menu_win_button_pressed"]
+[connection signal="pressed" from="LoseScreen/PlayAgain" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="LoseScreen/MenuLoseButton" to="." method="_on_menu_lose_button_pressed"]

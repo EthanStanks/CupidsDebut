@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp4hb58bcdxer"]
+
+[ext_resource type="Script" path="res://Bow/love_arrow.gd" id="1_af61h"]
+[ext_resource type="Texture2D" uid="uid://rimm4hook8yd" path="res://Art/LoveArrow.png" id="2_tfvof"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xvnih"]
+radius = 4.0
+height = 18.0
+
+[node name="Arrow" type="Area2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_af61h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xvnih")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -0.5)
+texture = ExtResource("2_tfvof")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

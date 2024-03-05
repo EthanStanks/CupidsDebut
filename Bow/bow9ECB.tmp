@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://ck1qmnaicnp70"]
+
+[ext_resource type="Script" path="res://Bow/bow.gd" id="1_728in"]
+[ext_resource type="Texture2D" uid="uid://crinffbahckds" path="res://Art/Bow/Bow.png" id="2_fo8t3"]
+[ext_resource type="Texture2D" uid="uid://v5x0dtwiyp8d" path="res://Art/Bow/Bow-Sheet.png" id="3_btusw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l21v"]
+radius = 140.129
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o3tk"]
+atlas = ExtResource("3_btusw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g15u"]
+atlas = ExtResource("3_btusw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsrlc"]
+atlas = ExtResource("3_btusw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf830"]
+atlas = ExtResource("3_btusw")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_runw2"]
+atlas = ExtResource("3_btusw")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sc0cv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fo8t3")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_7o3tk")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_4g15u")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_wsrlc")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_pf830")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_runw2")
+}],
+"loop": false,
+"name": &"Shoot",
+"speed": 5.0
+}]
+
+[node name="Bow" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_728in")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8l21v")
+
+[node name="BowPivot" type="Marker2D" parent="."]
+
+[node name="ShootingPoint" type="Marker2D" parent="BowPivot"]
+unique_name_in_owner = true
+position = Vector2(16, 0)
+
+[node name="BowSprite" type="AnimatedSprite2D" parent="BowPivot"]
+unique_name_in_owner = true
+position = Vector2(10, 0)
+sprite_frames = SubResource("SpriteFrames_sc0cv")
+animation = &"Shoot"
+autoplay = "Idle"
+
+[node name="StartAnimationTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+
+[connection signal="timeout" from="StartAnimationTimer" to="." method="_on_start_animation_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

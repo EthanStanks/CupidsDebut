@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://crn5whk6mih2h"]
+
+[ext_resource type="Script" path="res://Bow/arrow.gd" id="1_ilirx"]
+[ext_resource type="Texture2D" uid="uid://bjawrf02404wg" path="res://Art/NormalArrow.png" id="2_hb0hy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xvnih"]
+radius = 4.0
+height = 18.0
+
+[node name="Arrow" type="Area2D"]
+top_level = true
+z_index = -2
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ilirx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xvnih")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -0.5)
+texture = ExtResource("2_hb0hy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
